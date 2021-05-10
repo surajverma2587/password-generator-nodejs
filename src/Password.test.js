@@ -36,7 +36,7 @@ describe("Password Class", () => {
       isUppercase: true,
       isLowercase: true,
       isNumber: true,
-      isSpecialCharacter: true,
+      isSpecialCharacter: false,
     };
     it("should return a random lowercase character", () => {
       const password = new Password(mockAnswers);
@@ -63,9 +63,14 @@ describe("Password Class", () => {
       const password = new Password(mockAnswers);
       const actual = password.getRandomSpecialCharacter();
 
-      console.log(actual);
-
       expect(actual).toMatch(/[^A-Za-z0-9]/g);
+    });
+
+    it("should return a randomly generated password", () => {
+      const password = new Password(mockAnswers);
+      const actual = password.generate();
+
+      expect(actual).toMatch(/^[A-Za-z0-9.\s_-]+$/g);
     });
   });
 });

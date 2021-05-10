@@ -40,6 +40,35 @@ class Password {
 
     return specialCharacters[randomIndex];
   }
+
+  generate() {
+    const randomChoices = [];
+
+    if (this.isUppercase) {
+      randomChoices.push(this.getRandomUppercaseCharacter);
+    }
+
+    if (this.isLowercase) {
+      randomChoices.push(this.getRandomLowercaseCharacter);
+    }
+
+    if (this.isNumber) {
+      randomChoices.push(this.getRandomNumberCharacter);
+    }
+
+    if (this.isSpecialCharacter) {
+      randomChoices.push(this.getRandomSpecialCharacter);
+    }
+
+    const emptyPasswordArray = Array(this.length).fill("");
+
+    const callback = (each) => {
+      const randomIndex = Math.floor(Math.random() * randomChoices.length);
+      return randomChoices[randomIndex]();
+    };
+
+    return emptyPasswordArray.map(callback).join("");
+  }
 }
 
 module.exports = Password;
