@@ -1,9 +1,10 @@
 const inquirer = require("inquirer");
+const Password = require("./Password");
 
 const init = async () => {
   const questions = [
     {
-      type: "input",
+      type: "number",
       message: "What is the length of your password?",
       name: "length",
     },
@@ -31,7 +32,11 @@ const init = async () => {
 
   const answers = await inquirer.prompt(questions);
 
-  console.log(answers);
+  const password = new Password(answers);
+
+  const generatedPassword = password.generate();
+
+  console.log(generatedPassword);
 };
 
 init();
