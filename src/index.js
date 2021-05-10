@@ -7,6 +7,9 @@ const init = async () => {
       type: "number",
       message: "What is the length of your password?",
       name: "length",
+      validate: (length) => {
+        return (length >= 8 && length <= 128) || "Should be >= 8 and <= 128";
+      },
     },
     {
       type: "confirm",
